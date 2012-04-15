@@ -2,6 +2,19 @@ require "migrake"
 
 module Migrake
   module DSL
+    # Public: Define the rake tasks required to run migrake. This defines the
+    # following tasks:
+    #
+    #   - A task to create the `Migrake.status_file_directory` unless it exists.
+    #   - A task to create the MIGRAKE_STATUS file in the aforementioned
+    #     directory, unless it exists.
+    #   - A `migrake:ready` task to bootstrap new environments by writing all
+    #     the tasks to the store.
+    #   - The `migrake` task, that will run any tasks not run before.
+    #
+    # tasks - A Set of tasks to be run.
+    #
+    # Returns the `migrake` Rake::Task.
     def migrake(tasks)
       dir = Migrake.status_file_directory
       status_file = dir.join("MIGRAKE_STATUS")
