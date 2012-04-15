@@ -1,5 +1,6 @@
 require "rake/task"
 require "migrake/dsl"
+require "migrake/version"
 require "yaml"
 require "set"
 require "pathname"
