@@ -1,5 +1,7 @@
 # Migrake
 
+[![Build Status](https://secure.travis-ci.org/foca/migrake.png?branch=master)](http://travis-ci.org/foca/migrake)
+
 A simple [Rake][rake] extension that lets you define tasks that are divided into
 multiple smaller "versions". When you run the task in a given host, it will only
 run the "versions" that haven't yet been run in that host. Think something
