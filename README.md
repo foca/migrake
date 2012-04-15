@@ -45,26 +45,37 @@ check that file, see which tasks in the set aren't in it, and will run those
 tasks (no order is guaranteed, if you need tasks to run in order, define the
 dependencies in the task themselves.)
 
-## Overriding where to keep the MIGRAKE_STATUS file
+## Overriding the file where tasks are stored
 
 The file will be located, by default, at whichever directory `rake` is invoked
-from. In order to change that (for example, to put it in capistrano's `shared`
-directory), do either of the following:
-
-Define `Migrake.status_file_directory` before running the tasks (so, for
-example, at the top of your `migrake.rake`):
+from. In order to change the path to the file, you can do this:
 
 ``` ruby
-Migrake.status_file_directory = File.expand_path("../tmp", __FILE__)
+Migrake.store = Migrake::FileSystemStore.new("./config/migrake")
 ```
 
-Or as an alternative, pass it as an environment variable to Rake:
+This *must* be called in your Rakefile before you define the tasks to be run by
+`migrake`. Like this:
+
+``` ruby
+require "migrake"
+
+Migrake.store = Migrake::FileSystemStore.new("./config/migrake")
+
+migrake Set.new([
+  # ...
+])
+```
+
+As an alternative, you can make `MIGRAKE_STATUS_DIR` available to your
+environment, and migrake will use a `MIGRAKE_STATUS` file in that directory.
 
 ``` shell
 MIGRAKE_STATUS_DIR=./some/path bundle exec rake migrake
 ```
 
-The latter lets you define it within the capistrano definition file, like this:
+This is particularly useful to use with capistrano, since you probably want to
+use cap's `shared` directory to store your migrake file. For example:
 
 ``` ruby
 namespace :deploy do

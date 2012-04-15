@@ -1,14 +1,14 @@
 require_relative "test_helper"
 require "rake"
 
-describe Migrake::Runner do
+describe Migrake do
   it "runs tasks that aren't in the store" do
     define_tasks "a", "b", "c"
     define_store "a"
 
     expect_tasks_ran "b", "c"
 
-    Migrake::Runner.run(Set.new(["a", "b", "c"]), store)
+    Migrake.run(Set.new(["a", "b", "c"]), store)
 
     store.verify
   end
@@ -18,7 +18,7 @@ describe Migrake::Runner do
     define_store "a", "b", "c"
     # setting no expectation for tasks run passes only if no tasks are run
 
-    Migrake::Runner.run(Set.new(["a", "b", "c"]), store)
+    Migrake.run(Set.new(["a", "b", "c"]), store)
 
     store.verify
   end
@@ -29,7 +29,7 @@ describe Migrake::Runner do
 
     expect_tasks_ran "a"
 
-    Migrake::Runner.run(Set.new(["a", "b", "c"]), store)
+    Migrake.run(Set.new(["a", "b", "c"]), store)
 
     store.verify
   end
