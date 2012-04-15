@@ -23,11 +23,11 @@ In `lib/tasks/migrake.rake`:
 ``` ruby
 require "migrake"
 
-migrake Set.new(
+migrake Set.new([
   "data:set_default_user_state",
   "twitter:purge_cache",
   # etc, etc
-)
+])
 ```
 
 This would define a task called `:migrake` that, when called, will invoke the
