@@ -87,6 +87,17 @@ end
 after "deploy:migrations", "deploy:migrake"
 ```
 
+## Heroku and other environments where you can't easily write to the filesystem
+
+The `FileSystemStore` is easily swappable. For the particular case of Heroku and
+similar servers we provide the [Migrake::SQLStore][sql-store] gem, that
+implements the storage API using a database table.
+
+Writing a new storage engine should be trivial. Use either `FileSystemStore` or
+`SQLStore` as an example.
+
+[sql-store]: http://github.com/foca/migrake-sql_store
+
 ## Bootstrapping a new environment
 
 When you bootstrap a new environment you don't need to run migrake tasks that
