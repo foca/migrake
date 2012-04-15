@@ -1,0 +1,10 @@
+require "migrake"
+
+migrake Set.new(%w(a b c d))
+
+%w(a b c d).each do |t|
+  desc "Print #{t}"
+  task t do
+    puts t
+  end
+end
