@@ -1,0 +1,12 @@
+0.2.0 - April 15, 2012
+----------------------
+
+- Refactored Store into FileSystemStore, make it swappable
+- Added FileSystemStore#prepare
+- Clean up the generated Rake tasks.
+- Change Migrake::Runner.run to Migrake.run.
+
+0.1.0 - April 15, 2012
+----------------------
+
+Initial release! :party:
